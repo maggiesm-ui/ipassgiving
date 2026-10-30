@@ -1,0 +1,275 @@
+<!-- Sponsor a Teacher: paste this whole block where the cart should appear. Settings are in ITEMS and CONFIG near the bottom. -->
+<div class="pd-sponsor" id="pd-sponsor">
+<style>
+  .pd-sponsor{
+    --ink:#17262e; --muted:#53656e; --paper:#f6f8f9; --line:#c9d4d9;
+    --blue:#0f5bd7; --blue-dark:#0a3f99; --tint:#e6eefb; --white:#fff;
+    color:var(--ink); line-height:1.55; box-sizing:border-box;
+  }
+  .pd-sponsor *,.pd-sponsor *::before,.pd-sponsor *::after{box-sizing:border-box}
+  .pd-sponsor [hidden]{display:none!important}
+  .pd-sponsor h1,.pd-sponsor h2,.pd-sponsor h3{font-family:Georgia,"Iowan Old Style",serif;line-height:1.15;margin:0}
+  .pd-wrap{width:100%}
+  .pd-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+  .pd-group{margin-bottom:2.5rem}
+  .pd-group h2{font-size:1.5rem;padding-bottom:.35rem}
+  .pd-group>p{margin:0 0 .5rem;color:var(--muted);max-width:60ch;font-size:.95rem}
+  .pd-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.25rem 1.25rem;
+    padding:1rem 0;border-top:1px solid var(--line);align-items:center}
+  .pd-item:last-child{border-bottom:1px solid var(--line)}
+  .pd-item.has-qty{background:linear-gradient(90deg,var(--tint),transparent 85%);margin-inline:-.75rem;padding-inline:.75rem}
+  .pd-item h3{font-size:1.1rem}
+  .pd-item p{margin:.2rem 0 0;color:var(--muted);font-size:.93rem;max-width:52ch}
+  .pd-price{font-weight:700;font-variant-numeric:tabular-nums;text-align:right;font-size:1.1rem}
+  .pd-scale{grid-column:1/-1;height:4px;background:var(--line);border-radius:2px;margin-top:.6rem;overflow:hidden}
+  .pd-scale i{display:block;height:100%;background:var(--blue);border-radius:2px}
+  .pd-step{display:inline-flex;align-items:center;border:1.5px solid var(--ink);border-radius:999px;margin-top:.4rem;background:var(--white)}
+  .pd-step button{width:2.5rem;height:2.5rem;border:0;background:none;font:inherit;font-size:1.25rem;cursor:pointer;color:var(--ink);border-radius:50%}
+  .pd-step button:hover{background:var(--tint)}
+  .pd-step output{min-width:1.75rem;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+  .pd-sponsor a:focus-visible,.pd-sponsor button:focus-visible,.pd-sponsor input:focus-visible,.pd-sponsor textarea:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .pd-aside{position:sticky;top:1rem;background:var(--white);border:1.5px solid var(--ink);border-radius:6px;padding:1.25rem}
+  .pd-aside h2{font-size:1.25rem;margin-bottom:.75rem}
+  .pd-lines{list-style:none;margin:0 0 1rem;padding:0;font-size:.93rem}
+  .pd-lines li{display:grid;grid-template-columns:1fr auto;gap:.1rem 1rem;padding:.4rem 0;border-bottom:1px dotted var(--line)}
+  .pd-rm{grid-column:1/-1;justify-self:start;border:0;background:none;padding:0;font:inherit;font-size:.82rem;color:var(--blue-dark);text-decoration:underline;cursor:pointer}
+  .pd-empty{color:var(--muted);font-size:.93rem;margin:0 0 1rem}
+  .pd-total{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;margin-bottom:1rem}
+  .pd-total span:last-child{font-size:1.75rem;font-family:Georgia,serif;font-variant-numeric:tabular-nums}
+  .pd-aside label{display:block;font-size:.88rem;font-weight:600}
+  .pd-aside input{width:100%;margin:.25rem 0 .75rem;padding:.6rem .7rem;border:1.5px solid var(--line);border-radius:4px;font:inherit;background:var(--white);color:var(--ink)}
+  .pd-err{margin:.6rem 0 0;min-height:1.3em;font-size:.88rem;color:#a3231b}
+  .pd-aside textarea{width:100%;margin-top:.25rem;padding:.6rem .7rem;border:1.5px solid var(--line);border-radius:4px;font:inherit;background:var(--white);color:var(--ink);resize:vertical;min-height:3.5rem}
+  .pd-go{display:block;text-align:center;text-decoration:none;width:100%;margin-top:1.1rem;padding:.9rem 1rem;border-radius:4px;background:var(--blue);color:#fff;font-weight:700;font-size:1rem}
+  .pd-go:hover{background:var(--blue-dark)}
+  .pd-go[aria-disabled="true"]{background:var(--line);color:var(--muted);pointer-events:none}
+  .pd-fine{margin:.75rem 0 0;font-size:.82rem;color:var(--muted)}
+  .pd-pay{background:var(--tint);border-left:5px solid var(--blue);padding:1.25rem 1.5rem;margin:0 0 2rem;max-width:560px;border-radius:0 6px 6px 0}
+  .pd-pay h2{font-size:1.4rem;margin-bottom:.4rem}
+  .pd-pay p{margin:0 0 .5rem}
+  .pd-pay .pd-go{max-width:20rem}
+  .pd-bar{display:none;position:sticky;bottom:0;margin:1.5rem 0 0;
+    justify-content:space-between;align-items:center;padding:.85rem 1.25rem;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
+  .pd-bar span:last-child{font-variant-numeric:tabular-nums}
+  @media (max-width:860px){.pd-layout{grid-template-columns:1fr}.pd-aside{position:static}.pd-bar{display:flex}}
+  @media (prefers-reduced-motion:no-preference){.pd-scale i{transition:width .25s ease}}
+</style>
+
+<div class="pd-wrap">
+  <div class="pd-pay" id="pd-pay" hidden>
+    <h2>Thank you, <span id="pd-pay-name"></span></h2>
+    <p>We’ve recorded your pledge. One step left: complete your gift on our secure giving page.</p>
+    <a class="pd-go" id="pd-pay-go" href="#">Complete your gift</a>
+  </div>
+
+  <div class="pd-layout">
+    <div id="pd-menu"></div>
+
+    <aside class="pd-aside" id="pd-cart" aria-labelledby="pd-sum-title">
+      <h2 id="pd-sum-title">Your cart</h2>
+      <ul class="pd-lines" id="pd-lines"></ul>
+      <p class="pd-empty" id="pd-empty">Nothing in your cart yet. Use the + buttons to add items.</p>
+      <div class="pd-total"><span>Total</span><span id="pd-total" aria-live="polite">$0</span></div>
+      <label for="pd-name">Your name</label>
+      <input id="pd-name" autocomplete="name">
+      <label for="pd-email">Your email</label>
+      <input id="pd-email" type="email" autocomplete="email">
+      <label for="pd-note">In honor of (optional)</label>
+      <textarea id="pd-note"></textarea>
+      <p class="pd-err" id="pd-err" role="alert"></p>
+      <a class="pd-go" id="pd-checkout" href="#" aria-disabled="true">Checkout</a>
+      <p class="pd-fine">We’ll use your name and email to confirm what you chose to sponsor and to thank you. You’ll enter payment details on our secure giving page next.</p>
+    </aside>
+  </div>
+
+  <a class="pd-bar" id="pd-bar" href="#pd-cart" hidden><span id="pd-bar-l">View cart</span><span id="pd-bar-t">$0</span></a>
+</div>
+
+<script>
+(function(){
+  /* ---------- EDIT HERE ---------- */
+  // Prices below are placeholders. Replace with your real costs.
+  var ITEMS = [
+    {group:"Classroom essentials", blurb:"Small gifts for teachers who are paying for supplies themselves.", items:[
+      {id:"paper",   name:"A ream of paper",            desc:"500 sheets for a teacher who has run out of funds for the year.", price:8},
+      {id:"supplies",name:"Classroom supply refill",    desc:"Markers, pencils, folders, and tape to restock a classroom.",    price:35},
+      {id:"consum",  name:"Lab consumables for a class",desc:"Batteries, cables, and other small parts for a semester of labs.", price:75}
+    ]},
+    {group:"Equipment", blurb:"Hands-on tools teachers take back to their students.", items:[
+      {id:"iolab",   name:"One iOLab device",           desc:"A wireless, multi-sensor physics lab a teacher can use with every class.", price:200},
+      {id:"kit",     name:"Workshop materials kit",     desc:"Everything one teacher needs to run program activities at their school.",   price:150}
+    ]},
+    {group:"Summer PD conference", blurb:"Cover one piece of a teacher’s trip, or all of it.", items:[
+      {id:"reg",     name:"Conference registration",    desc:"Registration for one teacher.",                    price:350},
+      {id:"meals",   name:"Food for the conference",    desc:"All meals for one teacher during the conference.", price:250},
+      {id:"travel",  name:"Travel to the conference",   desc:"Round-trip travel for one teacher.",               price:400},
+      {id:"lodging", name:"Lodging at the conference",  desc:"Hotel or dorm room for one teacher for the week.", price:600},
+      {id:"full",    name:"Full sponsorship of one teacher", desc:"Registration, lodging, food, and travel together.", price:1500}
+    ]}
+  ];
+  var CONFIG = {
+    giveUrl: "https://www.givecampus.com/campaigns/49271/donations/new",
+    // The GiveCampus designation (fund/account) to pre-select. Find it in GiveCampus under
+    // your campaign’s “Generate Autofill Links”: pick the designation, then copy the
+    // value that follows designation_id= (or designation=) in the link it builds.
+    designationParam: "designation_id",   // or "designation"
+    designationValue: "",                 // e.g. "AD22380-40165"; leave "" to skip
+    sendNote: true,                       // also pass the cart contents in GiveCampus’s “note” field
+
+    // Where to save each pledge (name, email, items, total) before the donor moves on to GiveCampus.
+    // Paste the URL of a form endpoint: a Google Form’s .../formResponse address, Formspree, your site’s
+    // form handler, etc. Leave "" to skip saving (donors still go to GiveCampus).
+    collectUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdzcykFhVuq7LZ1hKbAgS86uBiiYpszFDpD1Irb4ayZmn63Cg/formResponse",
+
+    // ILLINOIS WEBTOOLS OPTION (takes priority over collectUrl when filled in).
+    // Donors are sent to your Webtools form with their pledge passed in as hidden fields, then
+    // return here to finish on GiveCampus. Set webtoolsFormUrl to the form’s address
+    // (https://forms.illinois.edu/sec/NNNNNNN) and webtoolsParams to the hidden field names you create.
+    // In the form’s settings, send respondents back to this page’s address followed by #pay.
+    webtoolsFormUrl: "",
+    webtoolsParams: {name:"name", email:"email", items:"items", total:"total", note:"note"},
+    returnHash: "#pay",
+    // The field name your endpoint expects for each value. For a Google Form these look like "entry.1234567890".
+    fields: {name:"entry.1568169154", email:"entry.1481781377", items:"entry.1945238342", total:"entry.608252063", note:"entry.386077890"}
+  };
+  /* ------------------------------- */
+
+  var root = document.getElementById("pd-sponsor");
+  var menu = root.querySelector("#pd-menu");
+  var $ = function(s){ return root.querySelector(s); };
+  var qty = {}, byId = {}, maxPrice = 0, KEY = "pdSponsorCart";
+  ITEMS.forEach(function(g){ g.items.forEach(function(i){ byId[i.id]=i; qty[i.id]=0; maxPrice=Math.max(maxPrice,i.price); }); });
+  var money = function(n){ return "$" + n.toLocaleString("en-US"); };
+  // log scale so an $8 gift stays visible next to a $1,500 one
+  var width = function(p){ return Math.max(3, Math.round(Math.log(p+1)/Math.log(maxPrice+1)*100)); };
+
+  try{ var saved = JSON.parse(sessionStorage.getItem(KEY)||"{}");
+    Object.keys(saved).forEach(function(k){ if(k in qty) qty[k] = Math.max(0, Math.min(99, parseInt(saved[k],10)||0)); }); }catch(e){}
+
+  menu.innerHTML = ITEMS.map(function(g){
+    return '<div class="pd-group"><h2>'+g.group+'</h2><p>'+g.blurb+'</p>' +
+      g.items.map(function(i){
+        return '<div class="pd-item" data-id="'+i.id+'">' +
+          '<div><h3>'+i.name+'</h3><p>'+i.desc+'</p></div>' +
+          '<div><div class="pd-price">'+money(i.price)+'</div>' +
+          '<div class="pd-step" role="group" aria-label="Quantity for '+i.name+'">' +
+          '<button type="button" data-d="-1" aria-label="Remove one '+i.name+'">\u2212</button>' +
+          '<output data-q>0</output>' +
+          '<button type="button" data-d="1" aria-label="Add one '+i.name+'">+</button></div></div>' +
+          '<div class="pd-scale" aria-hidden="true"><i style="width:'+width(i.price)+'%"></i></div></div>';
+      }).join("") + '</div>';
+  }).join("");
+
+  var linesEl=$("#pd-lines"), emptyEl=$("#pd-empty"), totalEl=$("#pd-total"),
+      go=$("#pd-checkout"), bar=$("#pd-bar"), noteEl=$("#pd-note"),
+      nameEl=$("#pd-name"), emailEl=$("#pd-email"), errEl=$("#pd-err");
+
+  function ids(){ return Object.keys(qty).filter(function(k){ return qty[k]>0; }); }
+  function total(){ return ids().reduce(function(s,k){ return s + qty[k]*byId[k].price; },0); }
+
+  function checkoutUrl(){
+    var p = [];
+    if(CONFIG.designationValue) p.push(CONFIG.designationParam+"="+encodeURIComponent(CONFIG.designationValue));
+    p.push("value="+total());                       // GiveCampus calls the amount “value”
+    if(CONFIG.sendNote){
+      var parts = ids().map(function(k){ return qty[k]+" x "+byId[k].name; });
+      var text = "Teacher PD sponsorship: " + parts.join("; ");
+      if(nameEl.value.trim() || emailEl.value.trim()) text += ". Pledged by: " + nameEl.value.trim() + " <" + emailEl.value.trim() + ">";
+      if(noteEl.value.trim()) text += ". In honor of: " + noteEl.value.trim();
+      p.push("note="+encodeURIComponent(text));
+    }
+    return CONFIG.giveUrl + "?" + p.join("&");
+  }
+
+  function render(){
+    var list = ids(), n = list.reduce(function(s,k){ return s+qty[k]; },0), t = total();
+    linesEl.innerHTML = list.map(function(k){
+      return '<li><span>'+qty[k]+' \u00d7 '+byId[k].name+'</span><span>'+money(qty[k]*byId[k].price)+'</span>' +
+             '<button type="button" class="pd-rm" data-rm="'+k+'">Remove</button></li>';
+    }).join("");
+    emptyEl.hidden = list.length>0;
+    totalEl.textContent = money(t);
+    bar.hidden = n===0;
+    $("#pd-bar-l").textContent = "View cart (" + n + (n===1?" item)":" items)");
+    $("#pd-bar-t").textContent = money(t);
+    if(n){ go.href = checkoutUrl(); go.setAttribute("aria-disabled","false"); go.textContent = "Checkout \u2013 " + money(t); }
+    else { go.href = "#"; go.setAttribute("aria-disabled","true"); go.textContent = "Checkout"; }
+    Array.prototype.forEach.call(menu.querySelectorAll(".pd-item"), function(row){
+      var q = qty[row.dataset.id];
+      row.querySelector("[data-q]").textContent = q;
+      row.classList.toggle("has-qty", q>0);
+    });
+    try{ sessionStorage.setItem(KEY, JSON.stringify(qty)); }catch(e){}
+  }
+
+  menu.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-d]"); if(!b) return;
+    var id = b.closest(".pd-item").dataset.id;
+    qty[id] = Math.max(0, Math.min(99, qty[id] + Number(b.dataset.d)));
+    render();
+  });
+  linesEl.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-rm]"); if(!b) return;
+    qty[b.dataset.rm] = 0; render();
+  });
+  [noteEl, nameEl, emailEl].forEach(function(el){ el.addEventListener("input", render); });
+
+  var sending = false;
+  go.addEventListener("click", function(e){
+    e.preventDefault();
+    if(go.getAttribute("aria-disabled")==="true" || sending) return;
+    var name = nameEl.value.trim(), email = emailEl.value.trim();
+    errEl.textContent = "";
+    if(!name){ errEl.textContent = "Enter your name so we can thank you."; nameEl.focus(); return; }
+    if(!/^\S+@\S+\.\S+$/.test(email)){ errEl.textContent = "Enter a valid email address."; emailEl.focus(); return; }
+    sending = true;
+    go.textContent = "Taking you to our giving page\u2026";
+    var dest = checkoutUrl(), moved = false;
+    function proceed(){ if(!moved){ moved = true; window.location.href = dest; } }
+    if(CONFIG.webtoolsFormUrl){
+      var W = CONFIG.webtoolsParams, enc = encodeURIComponent;
+      var itemsText = ids().map(function(k){ return qty[k]+" x "+byId[k].name+" ("+money(byId[k].price)+" each)"; }).join("; ");
+      var wq = [W.name+"="+enc(name), W.email+"="+enc(email), W.items+"="+enc(itemsText), W.total+"="+total(), W.note+"="+enc(noteEl.value.trim())].join("&");
+      try{ sessionStorage.setItem(KEY+"Pledge", JSON.stringify({name:name, dest:dest})); }catch(err){}
+      dest = CONFIG.webtoolsFormUrl + "?" + wq;
+      proceed();
+      return;
+    }
+    if(!CONFIG.collectUrl){ proceed(); return; }
+    var F = CONFIG.fields, data = new URLSearchParams();
+    data.append(F.name, name);
+    data.append(F.email, email);
+    data.append(F.items, ids().map(function(k){ return qty[k]+" x "+byId[k].name+" ("+money(byId[k].price)+" each)"; }).join("; "));
+    data.append(F.total, total());
+    data.append(F.note, noteEl.value.trim());
+    // Never trap a donor on this page: move on after 2.5 seconds even if the save is slow or fails.
+    setTimeout(proceed, 2500);
+    // If the site’s security policy blocks the POST, try the same values as a GET request, which
+    // Google Forms also accepts and which is often allowed under looser image rules.
+    function beacon(){
+      var img = new Image();
+      img.onload = img.onerror = proceed;   // Google answers with a web page, so "error" just means it was sent
+      img.src = CONFIG.collectUrl + "?" + data.toString() + "&submit=Submit";
+    }
+    fetch(CONFIG.collectUrl, {method:"POST", mode:"no-cors", keepalive:true, body:data}).then(proceed, beacon);
+  });
+
+  window.addEventListener("pageshow", function(e){ if(e.persisted){ sending = false; render(); } });
+
+  render();
+
+  // Returning from the Webtools form: offer the GiveCampus link with their cart already filled in.
+  if(CONFIG.webtoolsFormUrl && location.hash === CONFIG.returnHash){
+    try{
+      var pledge = JSON.parse(sessionStorage.getItem(KEY+"Pledge") || "null");
+      if(pledge && pledge.dest){
+        $("#pd-pay-name").textContent = pledge.name || "friend";
+        $("#pd-pay-go").href = pledge.dest;
+        $("#pd-pay").hidden = false;
+        $("#pd-pay").scrollIntoView();
+      }
+    }catch(err){}
+  }
+})();
+</script>
+</div>
